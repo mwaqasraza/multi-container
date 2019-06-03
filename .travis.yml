@@ -9,7 +9,11 @@ script:
   - docker run mwaqasraza/react-test npm test -- --coverage
  
 after_success:
-  - docker build -t jhelion/multi-client ./client
-  - docker build -t jhelion/multi-nginx ./nginx
-  - docker build -t jhelion/multi-server ./server
-  - docker build -t jhelion/multi-worker ./worker
+  - docker build -t mwaqasraza/multi-client ./client
+  - docker build -t mwaqasraza/multi-nginx ./nginx
+  - docker build -t mwaqasraza/multi-server ./server
+  - docker build -t mwaqasraza/multi-worker ./worker
+  # login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take all these build images to docker hub
+  - docker push 
