@@ -1,6 +1,7 @@
 sudo: required
 services:
   - docker
+  
 
 before_install:
   - docker build -t mwaqasraza/react-test -f ./client/Dockerfile.dev ./client
@@ -16,4 +17,7 @@ after_success:
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # take all these build images to docker hub
-  - docker push 
+  - docker push mwaqasraza/multi-client
+  - docker push mwaqasraza/multi-nginx
+  - docker push mwaqasraza/multi-server
+  - docker push mwaqasraza/multi-worker
